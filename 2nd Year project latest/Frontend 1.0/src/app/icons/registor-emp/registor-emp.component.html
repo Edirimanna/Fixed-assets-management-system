@@ -1,0 +1,259 @@
+
+<!--//////////////////////////////////////////////// dialogBox-->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<!-- DialogBox -->
+
+    <router-outlet></router-outlet>
+
+    <div class="card">
+            <header class="card-header">
+              <h4 class="card-title mt-2">Employee Registration</h4>
+            </header>
+
+                <div class="card-body">
+
+
+                   <form class="form-horizontal" #employeeForm="ngForm" (ngSubmit)=" onSubmit(employeeForm)" name="form">
+
+                        
+                    <div class="form-group"  [class.has-error]="firstname.invalid && firstname.touched"  [class.has-success]="firstname.valid">
+                            <label for="firstname" class="control-label"><b> First Name</b> </label>
+                            <div class="cols-sm-10">
+                                
+                                    <span class="input-group-addon"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="firstname" id="firstname" pattern="^[a-zA-Z]*$" [(ngModel)]="employee.firstname"  #firstname="ngModel" placeholder="Enter your First Name"  required firstname/>
+                                  <span class="help-block" *ngIf="firstname.errors?.required && firstname.touched" style="color:red">
+                                        First Name is required
+                                    </span>
+                                    <span class="help-block" *ngIf="firstname.errors?.pattern && firstname.touched" style="color:red">
+                                    Only alphabetical characters allowed
+                                    </span>
+                                </div>
+                            </div>
+                        
+                        <div class="form-group"  [class.has-error]="lastname.invalid && lastname.touched"  [class.has-success]="lastname.valid">
+                            <label for="lastname" class="cols-sm-2 control-label"> <b> Last Name</b> </label>
+                            <div class="cols-sm-10">
+                               
+                                    <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control"  name="lastname" id="lastname" pattern="^[a-zA-Z]*$" [(ngModel)]="employee.lastname"  #lastname="ngModel" placeholder="Enter your Last Name"  required lastname/>
+                                    <span class="help-block" *ngIf="lastname.errors?.required && lastname.touched" style="color:red">
+                                          Last Name is required
+                                      </span>
+                                      <span class="help-block" *ngIf="lastname.errors?.pattern && lastname.touched" style="color:red">
+                                        Only alphabetical characters allowed
+                                    </span>
+                                </div>
+                            </div>
+                       
+                       
+                        <div class="form-group" [class.has-error]="email.invalid && email.touched" [class.has-success]="email.valid">
+                            <label for="email" class="cols-sm-2 control-label"><b>Email</b> </label>
+                            <div class="cols-sm-10">
+                               
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"   [(ngModel)]="employee.email" #email="ngModel" placeholder="Enter your Email" required email/> 
+                                    <span class="help-block" *ngIf=" email.errors?.required && email.touched" style="color:red">
+                                        Email is required
+                                    </span>
+                                    <span class="help-block" *ngIf=" email.errors?.pattern && email.touched" style="color: red">
+                                          Valid Email needed
+                                      </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group"  [class.has-error]="location.invalid && location.touched" [class.has-success]="location.valid">
+                                   
+                                
+                                    <label for="location" class="cols-sm-2 control-label"><b>Department</b> </label>
+                                    
+                                    <div class="col-md-5 mb-3" >
+                                    <select name="location" id="location" style="width: 70mm;height:10mm"  [(ngModel)]="employee.location" required location #location="ngModel" >
+                  
+                                        <option [ngValue]="undefined" hidden>ex: IT,HR....</option>
+                                      <option value="Head office" >Head office</option>
+                                      <option value="IT Department" >IT Department</option>
+                                      <option value="HR Department" >HR Department</option>
+                                      <option value="Finance Department" >Finance Department</option>
+                                      <option value="Head office" >Front table</option>
+                                      <option value="Head office" >Lobby</option>
+                                      <option value="Head office" >Store Room</option>
+                                      
+                                    </select>
+                                  
+                           
+                            <span class="help-block" *ngIf="location.touched && location.invalid" style="color:red" >
+                                Department is Required
+                            </span>
+                             
+                            
+                    </div>
+                  </div>
+                  
+                
+                       
+                        
+                        <div class="form-group"  [class.has-error]="address.invalid && address.touched" [class.has-success]="address.valid">
+                          <label for="address" class="cols-sm-2 control-label"><b> Address</b> </label>
+                          <div class="cols-sm-10">
+                          
+                                  <span class="input-group-addon"><i class="fa fa-location-arrow" aria-hidden="true"></i></span>
+                                  <input type="text" class="form-control" name="address" id="address" [(ngModel)]="employee.address"  #address="ngModel" placeholder="Enter your Address"  required address/>
+                                  <span class="help-block" *ngIf="address.errors && address.errors.required && address.touched" style="color:red">
+                                        Address is required
+                                    </span> 
+                                   
+                              </div>
+                          </div>
+                     
+
+
+                      <div class="form-group"  [class.has-error]="contactNo.invalid && contactNo.touched"  [class.has-success]="contactNo.valid">
+                        <label for="contactNo" class="cols-sm-2 control-label"><b> Contact Number</b> </label>
+                        <div class="cols-sm-10">
+                                <span class="input-group-addon"><i class="fa fa-mobile" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="contactNo" id="contactNo" pattern="^\d{10}$" minlength="10" required maxlength="10" [(ngModel)]="employee.contactNo"   #contactNo="ngModel" placeholder="Enter the Contact Number"  required contactNo />
+                                <span class="help-block" *ngIf="  contactNo.errors?.required && contactNo.touched" style="color:red">
+                                        Contact Number is required
+                                    </span>
+                                    <span class="help-block" *ngIf=" contactNo.errors?.pattern && contactNo.touched" style="color:red">
+                                        10 digits only & Characters are not allowed
+                                    </span>
+                            </div>
+                        </div>
+                   
+                    <div class="form-group"  [class.has-error]="status.invalid && status.touched"  [class.has-success]="status.valid">
+                    
+                          <label for="status" class="cols-sm-2 control-label"><b>Status</b> </label>
+                          <div class="cols-sm-10">
+                          <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                      
+                          <select name="status" id="status" style="width: 70mm;height:10mm"  [(ngModel)]="employee.status" placeholder=" Status" required status #status="ngModel">
+                            <option [ngValue]="undefined" hidden>ex: Manager, CEO...</option>
+                            <option value="CEO" >CEO</option>
+                            <option value="Asset Manager" >Asset Manager</option>
+                            <option value="Department Head" >Department Head</option>
+                            <option value="Employee" >Employee</option>
+                            <option value="Store Keeper" >Store Keeper</option>
+                            <option value="ProjectManager" >Project Manager</option>
+                            <option value="EventOrganizer" >Event Organizer</option>
+
+                            
+                          </select>
+                          <span class="help-block" *ngIf="status.touched && status.invalid" style="color:red" >
+                                Status is Required
+                            </span>
+                            </div>
+                  </div>
+                  <div class="form-group"  [class.has-error]="gender.invalid && gender.touched"  [class.has-success]="gender.valid">
+
+                        <label for="username" class="cols-sm-2 control-label"><b>Gender</b> </label>
+                    <div class="cols-sm-10">
+                      <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                          <input class="form-check-input" type="radio" required   #gender="ngModel" name="gender" id="gender"  [(ngModel)]="employee.gender" value="Male"  >
+                                          <label class="cols-sm-2 control-label" for="gender"  style="margin:10px">
+                                            Male
+                                          </label>
+
+
+                                     <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="input-group-addon" type="radio" required #gender="ngModel" name="gender" id="gender"  [(ngModel)]="employee.gender" value="Female" >
+                                           <label class="form-check-label" for="gender"  style="margin:10px">
+                                                Female
+                                          </label>
+
+                                    </div>
+                                    <span class="help-block" *ngIf="gender.touched && gender.invalid" style="color:red" >
+                                            Gender is required
+                                        </span>
+                              </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group"  [class.has-error]="nic.invalid && nic.touched" [class.has-success]="nic.valid">
+                        <label for="username" class="cols-sm-2 control-label"><b>NIC</b> </label>
+                        <div class="cols-sm-10">
+                            
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="nic" id="nic" required maxlength="13" [(ngModel)]="employee.nic"   #nic="ngModel" placeholder="Enter NIC number"  required nic />
+                                <span class="help-block" *ngIf="nic.errors && nic.errors.required && nic.touched" style="color:red">
+                                        NIC Number is required
+                                    </span>
+                            </div>
+                        </div>
+                    
+
+                    <div class="form-group">
+                          <label for="username" class="cols-sm-2 control-label"><b> Profile image</b></label>
+                          <div class="cols-sm-10">
+                              <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                                             </div>
+                          </div>
+                      </div>
+                        <div>
+                          <img [src]="imgUrl" style="width: 250px;height:200px">
+
+                          <input type="file" name="img" id="img" #Image="ngModel" accept="image/*"  [(ngModel)]="employee.img" (change)="onChange($event)" required>
+
+
+                        </div>
+
+                        <div class="form-group" [class.has-error]="password.invalid && password.touched" [class.has-success]="password.valid">
+                            <label for="password" class="cols-sm-2 control-label" ><b>Password</b> </label>
+                            <div class="cols-sm-10">
+                               
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="password"  id="password"  [(ngModel)]="employee.password" #password="ngModel" placeholder="Enter your Password" required password />
+                                    <span class="help-block" style="color: red" *ngIf="password.errors?.required && password.touched">
+                                      Password is required
+                                  </span>
+                                  
+                                  
+                                </div>
+                            </div>
+                       
+
+
+                        
+
+                        
+                        <div class="form-group" [class.has-error]="confirmpassword.invalid && confirmpassword.touched" [class.has-success]="confirmpassword.valid">
+                            <label for="confirmpassword" class="cols-sm-2 control-label"><b> Confirm Password</b> </label>
+                            <div class="cols-sm-10">
+                                
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="confirmpassword" id="confirmpassword"  [(ngModel)]="employee.confirmpassword" #confirmpassword="ngModel" placeholder="Confirm your Password"appConfirmPassword="password" required confirmpassword />
+                                    <span class="help-block" style="color: red" *ngIf="confirmpassword.errors?.required && confirmpassword.touched">
+                                     Confirm Password is required
+                                  </span>
+                                  <span style="color: red" class="help-block" *ngIf="confirmpassword.errors?.notEqual && confirmpassword.touched && !confirmpassword.errors?.required">
+                                    Password and Confirm Password does not match 
+                                   </span>
+                                 
+                                  
+                                
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block login-button" [disabled]="employeeForm.invalid" >Register</button>
+                        </div>
+
+                    </form>
+                       </div>
+
+                      </div>
+
+
+
+
+
+
+
+
+

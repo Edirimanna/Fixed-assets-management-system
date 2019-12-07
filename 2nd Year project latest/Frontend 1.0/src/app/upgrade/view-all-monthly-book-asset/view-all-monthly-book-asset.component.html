@@ -1,0 +1,107 @@
+
+<!-- filter item using drop dwon list-->
+
+
+
+
+<div class="col-md-2 mb-3"><br>
+  <select name="status" id="status" class="form-control"  [(ngModel)]="searchTerm">
+  <option value="" >All</option>  
+  <option value="Computer" >Computer</option>
+  <option value="Furniture" >Furniture</option>
+  <option value="Projector" >Projector</option>
+  <option value="tv" >Television</option>
+  <option value="SoundSystem" >Sound Systems</option>
+  <option value="UPS" >UPS</option>
+  <option value="router" >Routers</option> 
+  </select>
+  <label for="status" class="cols-sm-2 control-label">Asset Catagory</label>
+</div>
+        
+  <div id="2s"> 
+    <!----------------------------------All Asset Table---------------------------------------->
+  <br><br>
+  <h5 style="text-align: center"><b>CodeGen International (Pvt) Ltd.</b> </h5><br>
+  <p style="text-align: center">Trace Expert City, Bay 1-5, Maradana Rd, Colombo 01, Sri Lanka.</p><br>
+  <h5 style="text-align: center"><b>Report of All Booking Assets' Details within a Month</b> </h5><br>
+ 
+
+    <hr  id="line" style="margin-top: 13px;"> 
+   
+  
+    <table id="selectedColumn" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead style="background-color: rgb(60, 123, 148);color: black;font-weight: bold">
+          <tr > 
+            <th class="th-sm" style="width: 4cm;font-size: large;"><b>AssetID </b>
+          </th>
+          <th class="th-sm" style="width: 4cm;font-size: large;"><b>Asset Catagory </b>
+          </th>
+          <th class="th-sm" style="width: 4cm;font-size: large;"><b>Employee Name </b>
+          </th>
+          <th class="th-sm" style="width: 4cm;font-size: large;"> <b>Employee NIC</b>
+          </th>
+          <th class="th-sm" style="width: 4cm;font-size: large;"> <b> Contact Number</b>
+          </th>
+            <th class="th-sm" style="width: 4cm;font-size: large;"> <b>From</b>
+            </th>
+            <th class="th-sm" style="width: 4cm;font-size: large;"><b> To </b>
+            </th>
+           
+            
+          
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let asset of AllBook |  assetfilterBook : searchTerm">
+          
+            <td style="width: 3cm;">{{asset.assetId}}</td>
+            
+            <td style="width: 7cm;">{{asset.requestedAsset.assetcategory}}</td>
+            
+            <td style="width: 9cm;">{{asset.userAssigned.firstname}} {{asset.userAssigned.lastname}}</td>
+            
+            <td style="width: 3cm;">{{asset.requestedNic}}</td>
+            <td style="width: 4cm;">{{asset.userAssigned.contactNo}}</td>
+          
+            <td style="width: 5cm;">{{asset.beginDate}}</td>
+            <td style="width: 5cm;">{{asset.dueDate}}</td>
+           
+          </tr>
+         
+        </tbody>
+        <tfoot>
+          <tr>
+            <th style="width: 3cm">AssetID
+            </th>
+            <th style="width: 3cm">Category
+            </th>
+            <th>location
+            </th>
+            <th>Bought Date
+            </th>
+            <th>Company
+            </th>
+            <th>Warranty Status
+            </th>
+            <th>Quantity
+              </th>
+          </tr>
+        </tfoot>
+      </table>
+    <!-------------------------------------end------------------------------------------------->
+     <pre style="text-align:right;">  <br> <br> ----------------- <br> <br>{{status}} <br>{{Fname}} {{Lname}} <br>{{email}} {{curent}}</pre>
+     <pre style=""><p>{{today | date:'dd-MM-yyyy hh:mm:ss a':'+0530'}}</p> </pre>
+     <pre style="text-align:right;"></pre>
+    
+  </div>
+     
+  
+   <div class="text-center" style="align-content: center">
+    <button  printSectionId="2s"
+    ngxPrint class="btn btn-primary hidden-print" ><span class="glyphicon glyphicon-print" style="align-content: center" aria-hidden="true"><i class="fa fa-print" style="font-size:24px"></i></span> Print</button>
+  
+  
+   </div>
+      
+  
+  

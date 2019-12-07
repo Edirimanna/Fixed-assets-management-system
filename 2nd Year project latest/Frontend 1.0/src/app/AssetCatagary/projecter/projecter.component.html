@@ -1,0 +1,288 @@
+<!--//////////////////////////////////////////////// dialogBox-->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<!-- DialogBox -->
+
+<div class="col-md-10">
+   
+    <header class="card-header">
+                                    
+            <h4 class="card-title mt-2">Projector Registration</h4>
+          </header>
+        
+        <div class="card-body">
+        
+            <form class="form-horizontal"  (ngSubmit)=" onSubmit(assetsForm) " name="form" #assetsForm="ngForm"  >
+        
+                    <div class="form-group"  [class.has-error]="brandName.invalid && brandName.touched" [class.has-success]="brandName.valid">
+                   
+                            <label for="brandName" class="cols-sm-2 control-label"><b>Brand Name</b></label>
+                   
+                            <div class="col-md-5 mb-3">
+                            <select name="brandName" id="brandName" style="width: 70mm;height:10mm"  [(ngModel)]="asset.brandName" placeholder="" required brandName #brandName="ngModel">
+                                <option [ngValue]="undefined" hidden>ex:samsung,canon</option>
+                              <option value="Samsung" >Samsung</option>
+                              <option value="Canon" >Canon</option>
+                              <option value="Casio" >Casio</option>
+                              <option value="Epson" >Epson</option>
+                              <option value="Toshiba" >Toshiba</option>
+                              
+                            </select>
+                            <span class="help-block" *ngIf="brandName.touched && brandName.invalid" style="color:red" >
+                                    Brand Name is Required
+                                </span>
+                    </div>
+                </div>
+                      
+               
+                <div class="form-group"  [class.has-error]="boughtDate.invalid && boughtDate.touched"  [class.has-success]="boughtDate.valid">
+                    <label for="boughtDate" class="cols-sm-2 control-label"><b>Purchased Date</b></label>
+                    <div class="cols-sm-10">
+                      
+
+                            <input type="text"  class="form-control" name="boughtDate"  placeholder="YYYY-MM-DD" id="boughtDate"  [(ngModel)]="asset.boughtDate" [minDate]="minDate" [maxDate]="maxDate"   required boughtDate #boughtDate="ngModel"  bsDatepicker  [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }"   />
+                            <span class="help-block" *ngIf="boughtDate.touched && boughtDate.invalid" style="color:red" >
+                                Date is Required
+                            </span>
+                       
+                       
+                    </div>
+                </div>
+                
+                <div class="form-group"  [class.has-error]="buyingPrice.invalid && buyingPrice.touched"  [class.has-success]="buyingPrice.valid">
+                    <label for="buyingPrice" class="cols-sm-2 control-label"><b>Price</b></label>
+                    <div class="cols-sm-10">
+                            <div class="input-group">
+                                    <div class="input-group-addon">
+                                      <span class="input-group-text" id="buyingPrice">Rs.</span>
+                                    </div>
+                       
+                                <span class="input-group-addon"><i class="fa fa-model" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="buyingPrice" id="buyingPrice" pattern="^(0|[1-9]\d*)(\.\d+)?$" #buyingPrice="ngModel" [(ngModel)]="asset.buyingPrice" placeholder="10000.00" required buyingPrice/>
+                        </div>
+                            <span class="help-block" *ngIf=" buyingPrice.errors?.required && buyingPrice.touched" style="color:red">
+                                    Price is required
+                                </span> 
+                                <span class="help-block" *ngIf="buyingPrice.errors?.pattern && buyingPrice.touched" style="color:red">
+                                    price is invalid
+                              </span> 
+                      
+                    </div>
+                </div>
+
+                <div class="form-group"  [class.has-error]="location.invalid && location.touched" [class.has-success]="location.valid">
+                                   
+                                
+                    <label for="location" class="cols-sm-2 control-label"><b>Location</b></label>
+                    
+                    <div class="col-md-5 mb-3" >
+                    <select name="location" id="location" style="width: 70mm;height:10mm"  [(ngModel)]="asset.location" required location #location="ngModel">
+  
+                        <option [ngValue]="undefined" hidden>ex:HR, IT...</option>
+                      <option value="Head office" >Head office</option>
+                      <option value="IT Department" >IT Department</option>
+                      <option value="HR Department" >HR Department</option>
+                      <option value="Finance Departmentn" >Finance Department</option>
+                      <option value="Head office" >Front table</option>
+                      <option value="Head office" >Lobby</option>
+                      <option value="Head office" >Store Room</option>
+                      
+                    </select>
+                  
+           
+            <span class="help-block" *ngIf="location.touched && location.invalid" style="color:red" >
+                Location is Required
+            </span>
+             
+            
+    </div>
+  </div>
+  
+
+                <!-- Default checked -->
+                <div class="form-group"  [class.has-error]="warrantyStatus.invalid && warrantyStatus.touched" >
+                            
+                        <label for="warrantyStatus" class="cols-sm-2 control-label"><b>Warranty Status</b></label>
+                    <div class="cols-sm-10">
+                     
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                          <input class="form-check-input" type="radio" required #warrantyStatus="ngModel" name="examplewarranty" id="warrantyStatus"  [(ngModel)]="asset.warrantyStatus"value="YES" (click)= "toggleWarranty(false)" >
+                                          <label class="cols-sm-2 control-label" for="warrantyStatus"  style="margin:5px">
+                                            YES
+                                          </label>
+
+
+                                     <div class="custom-control custom-radio custom-control-inline">
+                                        <input class="form-check-input" type="radio" required #warrantyStatus="ngModel" name="warrantyStatus" id="examplwarranty"  [(ngModel)]="asset.warrantyStatus"value="NO"  (click)= "toggleWarranty(true)" >
+                                           <label class="form-check-label" for="warrantyStatus"  style="margin:5px">
+                                                NO
+                                          </label>
+
+                                    </div>
+                                    <span class="help-block" *ngIf="warrantyStatus.touched && warrantyStatus.invalid" style="color:red" >
+                                            Warranty Status is required
+                                        </span>
+                              </div>
+                        </div>
+                    </div>
+                     
+                            <div class="form-group" [hidden] = "hideWarranty">
+                                    <div class="cols-sm-10">
+                                <label for="warranty" class="cols-sm-2 control-label"><b>Warranty Period</b></label>
+                    
+                        </div>
+                    </div>
+
+                    <div class="form-row" [hidden] = "hideWarranty">
+                        <div class="col-md-4 mb-3">
+                                <div class="form-group" >
+                                <label for="yrs" class="cols-sm-2 control-label"><b>Years</b></label><br>
+                                <select name="yrs" id="yrs" name="yrs" style="width: 45mm;height:10mm"  [(ngModel)]="asset.yrs" placeholder="yrs" #yrs="ngModel">
+                                    <option [ngValue]="undefined" hidden>0 </option>
+                                  <option value="1 years" >1 year</option>
+                                  <option value="2 years" >2 year</option>
+                                  <option value="3 years" >3  year</option>
+                                  <option value="4 years" >4 year</option>
+                                  <option value="5 years" >5 year</option>
+                                  <option value="8 yeras" >8 year</option>
+                                  <option value="10 years" >10 year</option>
+                                </select>
+                                
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                            <div class="form-group"   >
+                            <label for="months" class="cols-sm-2 control-label"><b>Months</b></label><br>
+                            <select name="months" id="months" name="months" style="width: 45mm;height:10mm"  [(ngModel)]="asset.months" placeholder="months"  #months="ngModel">
+                                <option [ngValue]="undefined" hidden>0</option>
+                              <option value="1 month" >1 month</option>
+                              <option value="2 months" >2 month</option>
+                              <option value="5 months" >5 month</option>
+                              <option value="8 months" >8 months</option> 
+                              <option value="10 months" >10 months</option>
+                            </select>
+                           
+
+                    </div>
+                </div>
+
+
+
+                      <div class="col-md-4 mb-3">
+                                    <div class="form-group" >
+                                    <label for="days" class="cols-sm-2 control-label"><b>Days</b></label><br>
+
+
+                                    <select name="days" id="days" style="width: 45mm;height:10mm"  [(ngModel)]="asset.days" placeholder=" Days" days #days ="ngModel">
+                                        <option [ngValue]="undefined" hidden>0</option>
+                                      <option value="7 days" >7 days</option>
+                                      <option value="10 days" >10 days</option> 
+                                      <option value="14 days" >14 days</option>
+                                      <option value="21 days" >21 days</option>
+                                    </select>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+               
+                <div class="form-group"  [class.has-error]="boughtCompanyName.invalid && boughtCompanyName.touched"  [class.has-success]="boughtCompanyName.valid">
+                        <label for="boughtCompanyName" class="cols-sm-2 control-label"><b>Companya Name</b></label>
+                        <div class="cols-sm-10">
+                            
+                                  <span class="input-group-addon"><i class="fa fa-model" aria-hidden="true"></i></span>
+                                  <input type="text" class="form-control" name="boughtCompanyName" id="boughtCompanyName"  [(ngModel)]="asset.boughtCompanyName"   #boughtCompanyName="ngModel" placeholder="xxxx (Pvt) Ltd."  required boughtCompanyName />
+                                  <span class="help-block" *ngIf="boughtCompanyName.errors && boughtCompanyName.errors.required && boughtCompanyName.touched" style="color:red">
+                                          Company Name is required
+                                      </span> 
+
+                                
+                        </div>
+                    </div>
+                    <div class="form-group"  [class.has-error]="boughtCompanyAddress.invalid && boughtCompanyAddress.touched" [class.has-success]="boughtCompanyAddress.valid">
+                      <label for="boughtCompanyAddress" class="cols-sm-2 control-label"><b>Company Address</b></label>
+                      <div class="cols-sm-10">
+                          
+                             
+                                  <span class="input-group-addon"><i class="fa fa-model" aria-hidden="true"></i></span>
+                                  <input type="text" class="form-control" name="boughtCompanyAddress" id="boughtCompanyAddress"  [(ngModel)]="asset.boughtCompanyAddress"   #boughtCompanyAddress="ngModel" placeholder="No:xx,city,country"  required boughtCompanyAddress />
+                                  <span class="help-block" *ngIf="boughtCompanyAddress.errors && boughtCompanyAddress.errors.required && boughtCompanyAddress.touched" style="color:red">
+                                          Company Address is required
+                                      </span> 
+                          </div>
+                      </div>
+                  
+                 
+                      <div class="form-group"  [class.has-error]="companyContact.invalid && companyContact.touched"  [class.has-success]="companyContact.valid">
+                        <label for="companyContact" class="cols-sm-2 control-label"><b>Company Contact Number</b> </label>
+                        <div class="cols-sm-10">
+                                
+                                <input type="text" class="form-control" name="companyContact" id="companyContact" pattern="^\d{10}$" minlength="10" required maxlength="10" [(ngModel)]="asset.companyContact"  
+                                 #companyContact="ngModel" placeholder="0xxxxxxxx"  required companyContact />
+                                <span class="help-block" *ngIf="  companyContact.errors?.required && companyContact.touched" style="color:red">
+                                        Contact Number is required
+                                    </span>
+                                    <span class="help-block" *ngIf=" companyContact.errors?.pattern && companyContact.touched" style="color:red">
+                                        10 digits number required
+                                    </span>
+                            </div>
+                        </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                        <div class="form-group"  [class.has-error]="categoryTypes.invalid && categoryTypes.touched" [class.has-success]="categoryTypes.valid">
+                        <label for="categoryTypes" class="cols-sm-2 control-label"><b>Category</b></label><br>
+                        <select name="categoryTypes" id="categoryTypes" style="width: 70mm;height:10mm"  [(ngModel)]="asset.categoryTypes" placeholder=""required categoryTypes #categoryTypes="ngModel">
+                            <option [ngValue]="undefined" hidden>ex:lcd...</option>
+                        <option value="LCD" >LCD</option>
+                        <option value="CRT" >CRT</option>
+                        <option value="DLP" >DLP</option>
+                        </select>
+                        <span class="help-block" *ngIf="categoryTypes.touched && categoryTypes.invalid" style="color:red" >
+                                Category is Required
+                            </span>
+                </div>
+                </div>
+             
+                    <div class="col-md-6 mb-3">
+                <div class="form-group"  [class.has-error]="quantity.invalid && quantity.touched"  [class.has-success]="quantity.valid" >
+                        <label for="quantity" class="cols-sm-2 control-label"><b>Quantity</b></label>
+                        <span class="input-group-addon"><i class="fa fa-model" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="quantity" id="quantity" pattern="^\d+$" [(ngModel)]="asset.quantity"   #quantity="ngModel" placeholder="0"  required quantity/>
+                            <span class="help-block" *ngIf=" quantity.errors?.required && quantity.touched" style="color:red">
+                                    Quantity is required
+                                </span>
+                                <span class="help-block" *ngIf="quantity.errors?.pattern && quantity.touched" style="color:red">
+                                    Only numbers required
+                                </span>
+                </div>
+            </div>
+            </div>      
+                <div class="form-group shadow-textarea">
+                    <label for="exampleFormControlTextarea6"><b>Description</b></label>
+                    <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6"  maxlength="240" rows="3" name="description"  [(ngModel)]="asset.description"  placeholder="Write Description here..."></textarea>
+                    <small id="passwordHelpInline" class="text-muted">
+                            Must be less than 240 words
+                          </small>
+                  </div>
+
+                  
+                    
+                    <!-- Horizontal material form -->
+
+                
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button" [disabled]="assetsForm.invalid" >Register</button>
+                </div>
+                
+            </form>
+      
+                                
+</div>
+</div>
+
+

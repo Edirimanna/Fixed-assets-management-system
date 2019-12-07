@@ -1,0 +1,85 @@
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+
+  .ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
+  .group.button{
+      background-color: #42A948;
+  }
+
+  .alert{
+    color: #f0e6e6;
+    background-color: #fd0c08;
+  }
+  .f{
+
+    font: 1em sans-serif;
+    font-size: medium;
+    font-style: normal;
+
+  }
+  .hed{
+    color: #a94442;
+  }
+
+
+
+
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 101px;
+    height: 101px;
+    margin: 6px;
+    border: 6px solid rgb(8, 10, 107);
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: rgb(44, 24, 228) transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .btn.btn:hover{
+    background: rgb(19, 85, 139);
+
+  }
+
+  .btn-group-toggle {
+    background-color:rgb(87, 84, 84);
+  }
+
+  .active-button {
+     background-color: rgba(90, 171, 218, 0.56)!important;
+    border-color: rgba(117, 127, 243, 0.666)!important;
+    border-width: 0.3mm!important;
+  }
+
+  .udith1 {
+    margin-right: 0px!important;
+  }
+
+
